@@ -1,0 +1,35 @@
+.site-header {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.site-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: rgb(0,0,0);
+}
+
+.site-name:visited {
+    color: rgb(0,0,0);
+}
+
+.main-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-items {
+    display: flex;
+    font-family: 'Playfair Display', serif;
+    color: rgb(98, 98, 98);
+    align-items: center;
+}
+
+.nav-items li:not(:last-child) {
+    margin-right: 120px;
+}
+
+.nav-menu-item:visited {
+    color: rgb(98, 98, 98);
+}

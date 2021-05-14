@@ -1,0 +1,37 @@
+.text-editor-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 25px;
+}
+
+.text-editor-wrapper {
+    max-width: 1000px;
+    padding: 30px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.editor-text-field {
+    border: 1px solid black;
+}
+
+.blog-options-menu {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-description-label {
+    margin: 0px 20px;
+}
+
+
+
+
+
+
