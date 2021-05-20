@@ -33,7 +33,7 @@ const BlogPostsPage = ({ history }) => {
     const classes = useStyles();
     return (
         <>
-            <Grid  alignItems="center" className={classes['blog-posts-container']}>
+            <Grid  className={classes['blog-posts-container']}>
                 {blogPosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />
                 )}
             </Grid>

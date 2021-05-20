@@ -3,11 +3,9 @@ import { useState, useContext, useEffect } from 'react';
 import UserContext from '../Contexts/UserContext';
 import TokenContext from '../Contexts/TokenContext'
 import GeneralInfo from './GeneralInfo';
-import BookingInfo from './BookingInfo';
 import BlogsInfo from './BlogsInfo';
 import './Profile.css';
 import { uploadEditedGeneralInfo, } from '../services/user';
-import { uploadEditedBooking } from '../services/bookService';
 import { deleteBlogPost, deleteFavoritePost } from '../services/blogService';
 import { withRouter } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
@@ -63,15 +61,6 @@ const Profile = ({ history }) => {
         setisEditingBookingInfo(currentState => !currentState);
     }
 
-    const onBookingInfoFormSubmitHandler = (newBookingDetails) => {
-        uploadEditedBooking(newBookingDetails, user._id, user.bookings[0]._id)
-            .then(updatedUser => {
-                setUser(updatedUser)
-                setisEditingBookingInfo(false)
-                setShowAlert('success', 'Your booking has been edited!')
-            })
-            .catch(err => console.log(err))
-    }
 
     const blogBoxClickHandler = (id) => {
         history.push(`/blog/read-more/${id}`)
@@ -110,12 +99,6 @@ const Profile = ({ history }) => {
                 submitClickHandler={onGeneralInfoFormSubmitHandler}
             />
             <Divider />
-            <BookingInfo
-                user={{ ...user }}
-                isEditing={isEditingBookingInfo}
-                editClickHandler={isEditingBookingInfoHandler}
-                submitClickHandler={onBookingInfoFormSubmitHandler}
-            />
             <Divider />
             <BlogsInfo
                 blogBoxClickHandler={blogBoxClickHandler}

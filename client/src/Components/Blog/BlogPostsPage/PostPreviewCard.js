@@ -107,7 +107,7 @@ const PostPreviewCard = ({ blogData, user, setUser }) => {
                     width={400}
                 />
                 <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" color="textSecondary" component="div">
                         {ReactHtmlParser(content)}
                     </Typography>
                 </CardContent>

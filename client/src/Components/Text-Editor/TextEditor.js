@@ -1,37 +1,65 @@
+import { today } from '../services/bookService';
 import './TextEditor.css';
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from 'draft-js';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-// import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import UserContext from '../Contexts/UserContext';
 import TextField from '@material-ui/core/TextField';
-const TextEditor = () => {
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+const TextEditor = ({ sendBlogPost, scrollToPreviewDiv }) => {
 
+    const user = useContext(UserContext)[0];
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
+    const [selectValue, setSelectValue] = useState('Lifestyle')
+    const [submitBtnType, setSubmitBtnType] = useState('Submit Post')
     const onEditorStateChange = (editorState) => {
         setEditorState(editorState)
     }
 
-    const onBlogSubmit = (e) => {
+    const handleSelectValueChange = (e) => {
+        setSelectValue(e.target.value)
+    }
+
+    const blogPostCompiler = (e) => {
         e.preventDefault()
+        console.log(user)
         const form = e.target;
-        const blog = {
-            title: form.title.value,
-            summary: form.summary.value,
-            category: form.category.value,
-            body: draftToHtml(convertToRaw(editorState.getCurrentContent()))
+        const blogPost = {
+            title: form?.title?.value,
+            imageUrl: form?.imageUrl?.value,
+            category: form?.category?.value,
+            content: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+            author: `${user?.firstName} ${user?.lastName}`,
+            authorImageUrl: user.imageUrl,
+            createdOn: today,
+            userId: user._id
         }
-        console.log(blog)
+        return blogPost;
+    }
+
+    const onFormButtonClick = (e) => {
+        setSubmitBtnType(e.target.textContent)
+    }
+
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+        const blogPost = blogPostCompiler(e);
+        sendBlogPost(submitBtnType, blogPost);
+        if (submitBtnType === 'Preview Post') { scrollToPreviewDiv() }
     }
 
     return (
-        <form className="text-editor-form" onSubmit={onBlogSubmit}>
+        <form className="text-editor-form" onSubmit={onFormSubmit}>
             <div className="blog-options-menu">
-                <label htmlFor="title">
-                    Blog Title
-                <TextField
+                <div className="blog-title-container">
+                    <label htmlFor="title" className="title-label">
+                        Blog Title
+                    </label>
+                    <TextField
                         variant="outlined"
                         margin="normal"
                         required
@@ -40,28 +68,37 @@ const TextEditor = () => {
                         autoComplete="title"
                         autoFocus
                     />
-                </label>
-                <label htmlFor="description" className="blog-description-label">
-                    Blog Description
+                </div>
+                <div className="blog-imageUrl-container">
+                    <label htmlFor="imageUrl" className="imageUrl-label">
+                        Image URL
+                    </label>
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        name="description"
-                        autoComplete="description"
-                        autoFocus
+                        name="imageUrl"
+                        autoComplete="imageUrl"
                     />
-                </label>
-                <label htmlFor="category">
-                    Blog Category
-                
-                <select name="category">
-                    <option value="lifestyle">lifestyle</option>
-                    <option value="sports">sports</option>
-                    <option value="cooking">cooking</option>
-                </select>
-                </label>
+                </div>
+                <div className="blog-category-container">
+                    <label htmlFor="category" className="category-label">
+                        Blog Category
+                    </label>
+                    <Select
+                        name="category"
+                        labelId="demo-simple-select-filled-label"
+                        id="demo-simple-select-filled"
+                        label="Category"
+                        value={selectValue}
+                        onChange={handleSelectValueChange}
+                    >
+                        <MenuItem value={"Lifestyle"}>Lifestyle</MenuItem>
+                        <MenuItem value={"Food"}>Food</MenuItem>
+                        <MenuItem value={"Sports"}>Sports</MenuItem>
+                    </Select>
+                </div>
             </div>
             <Editor
                 editorState={editorState}
@@ -73,7 +110,13 @@ const TextEditor = () => {
                     { borderBottom: "1px solid black", }
                 }
             />
-            <input className="submit-post-btn" type="submit" name="submit" value="Submit Post" />
+            <div className="form-buttons">
+                <Button type="submit" name="preview-submit" variant="contained"
+                    color="primary" onClick={onFormButtonClick}>Preview Post</Button>
+                <Button className="submit-post-button" type="submit"
+                    name="submit" variant="contained" color="secondary"
+                    onClick={onFormButtonClick}>Submit Post </Button>
+            </div>
         </form>
     )
 }

@@ -1,11 +1,5 @@
-// import HeroImage from '../../HeroImage/HeroImage';
-// import TextEditor from './TextEditor/TextEditor';
 import TextEditor from '../../Text-Editor/TextEditor'
-import { useState, useEffect, useRef, useContext } from 'react';
-import UserContext from '../../Contexts/UserContext';
-// import TokenContext from '../../Contexts/TokenContext'
-import { addBlogPost, decodeBlogPost } from '../../services/blogService';
-import { today } from '../../services/bookService';
+import { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import BlogPost from '../ReadBlogPost/BlogPost';
 import Grid from '@material-ui/core/Grid';
@@ -14,17 +8,7 @@ import useAlert from '../../../hooks/useAlert';
 import hideAlertAndRedirect from '../../services/all'
 
 const CreateBlog = ({ history }) => {
-
-    const [user, setUser] = useContext(UserContext);
     
-    useEffect(() => {
-        if (!user) {
-            history.push('/login')
-            return;
-        }
-    });
-
-    const author = `${user?.firstName} ${user?.lastName}`;
     const { showAlert, setShowAlert, alertMessage } = useAlert();
 
     useEffect(() => {
@@ -34,58 +18,43 @@ const CreateBlog = ({ history }) => {
         hideAlertAndRedirect(setShowAlert);
     }, [showAlert])
 
-
-    const [body, setBody] = useState('')
     const [preview, setPreview] = useState(false);
     const [post, setPost] = useState({})
-
-    const [imageUrl, setImageUrl] = useState('');
-    
-    const onImageUrlInputChangeHandler = (e) => {
-        setImageUrl(e.target.value)
-    }
 
     const postPreview = useRef();
 
     useEffect(() => {
-        if (preview && body) {
-            setPost(decodeBlogPost(
-                compileBlogPost()))
-            postPreview.current.scrollIntoView({ behavior: 'smooth' })
+        if (preview && post) {
+            scrollToPreviewDiv()
         }
     }, [preview])
 
-    const compileBlogPost = () => {
-        return {
-            content: body,
-            imageUrl,
-            author,
-            createdOn: today,
-            userId: user._id
-        }
+    const scrollToPreviewDiv = () => {
+        postPreview.current.scrollIntoView({ behavior: 'smooth' })
     }
 
-    const submitPost = (e) => {
-        e.preventDefault();
-        const body = compileBlogPost();
-        addBlogPost(body)
-            .then(updatedUser => {
-                setUser(updatedUser)
-                setShowAlert('success', 'Blog post created!')
-            })
-    }
-    const onTextEditorChangeHandler = (e, editor) => {
-        const data = editor.getData();
-        setBody(data)
-    }
+    // const submitPost = (e) => {
+    //     e.preventDefault();
+    //     const body = compileBlogPost();
+    //     addBlogPost(body)
+    //         .then(updatedUser => {
+    //             setUser(updatedUser)
+    //             setShowAlert('success', 'Blog post created!')
+    //         })
+    // }
+    // const onTextEditorChangeHandler = (e, editor) => {
+    //     const data = editor.getData();
+    //     setBody(data)
+    // }
 
-    const onPreviewPostBtnClick = () => {
-        return setPreview((currentPreview) => (!currentPreview));
+    const sendBlogPost = (previewOrSubmit, blogPost) => {
+        console.log(blogPost)
+        previewOrSubmit === 'Preview Post' ? setPreview(true) : setPreview(false); 
+        setPost(blogPost)
     }
 
     return (
         <Grid>
-            {/* <HeroImage image={'createBlog.jpg'} /> */}
             { showAlert ?
                 <Alert variant="outlined" severity={showAlert} style={{ width: '20%', margin: '0 auto', marginTop: '2rem' }}>
                     {alertMessage}
@@ -93,14 +62,10 @@ const CreateBlog = ({ history }) => {
                 :
                 null
             }
-            {/* <TextEditor onTextEditorChange={onTextEditorChangeHandler}
-                onSubmit={submitPost} onPreview={onPreviewPostBtnClick}
-                onImageUrlInputChangeHandler={onImageUrlInputChangeHandler}
-            /> */}
-            <TextEditor />
+            <TextEditor sendBlogPost={sendBlogPost} scrollToPreviewDiv={scrollToPreviewDiv} />
             <Grid >
                 {preview ?
-                    <BlogPost post={{ ...post }} />
+                    <BlogPost post={post} dangerouslySetInnerHTML={{ __html: post }} />
                     : null
                 }
                 <div ref={postPreview} />

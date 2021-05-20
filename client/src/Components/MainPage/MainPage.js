@@ -7,8 +7,8 @@ const MainPage = () => {
     return (
         <div className={style["main-page-container"]}>
             <HeroImage imageSrc={"main.jpg"} />
-            <BlogPostsPage></BlogPostsPage> 
-        </div >
+            <BlogPostsPage /> 
+        </div>
     )
 }
 
