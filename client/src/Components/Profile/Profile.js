@@ -40,7 +40,7 @@ const Profile = ({ history }) => {
     })
 
     const [isEditingGeneralInfo, setisEditingGeneralInfo] = useState(false);
-    const [isEditingBookingInfo, setisEditingBookingInfo] = useState(false);
+
 
     const isEditingGeneralInfoHandler = () => {
         setisEditingGeneralInfo(currentState => !currentState);
@@ -56,11 +56,6 @@ const Profile = ({ history }) => {
             })
             .catch(err => console.log(err))
     }
-
-    const isEditingBookingInfoHandler = () => {
-        setisEditingBookingInfo(currentState => !currentState);
-    }
-
 
     const blogBoxClickHandler = (id) => {
         history.push(`/blog/read-more/${id}`)

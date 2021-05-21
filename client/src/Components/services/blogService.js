@@ -2,27 +2,6 @@
 import { sendRequest } from './server'
 const postRequest = ['POST', 'application/json'];
 
-function decodeBlogPost(postData) { 
-    const regextPatterns = {
-        heading: /<h[0-6]>.+<\/h[0-6]>/gm,
-        content: /<p>.+<\/p>/gm
-    };
-    const title = postData.content.match(regextPatterns.heading);
-    const content = postData.content.split(regextPatterns.heading);
-    if (title) {
-        content.splice(content.indexOf(''), 1)
-    }
-    const post = {
-        title,
-        content,
-        author: postData.author,
-        createdOn: postData.createdOn,
-        imageUrl: postData.imageUrl,
-        _id: postData._id,
-        comments: postData.comments
-    }
-    return post;
-}
 
 function getOnePost(postId) {
     return sendRequest(`/blog/posts/${postId}`)
@@ -58,7 +37,6 @@ function deleteFavoritePost(blogId, userId) {
 }
 
 export {
-    decodeBlogPost,
     getPosts,
     getOnePost,
     updatePostWithComment,

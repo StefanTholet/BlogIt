@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const dbServices = require('../services/db');
 const User = require('../DB/models/User');
-const Booking = require('../DB/models/Booking')
+
 
 router.get('/:userId/get-current', (req, res) => {
     const { userId } = req.params;
@@ -18,32 +18,6 @@ router.post('/:userId/edit-profile', (req, res) => {
         .then(updateduser => res.json(updateduser))
         .catch(err => console.log(err))
 
-})
-
-router.post('/:userId/bookings/:bookingId/edit', (req, res) => {
-    const { bookingId } = req.params;
-    const { userId } = req.params;
-    dbServices.updateDoc(Booking, bookingId, req.body)
-        .then(data => dbServices.getUpdatedUser(userId))
-        .then(updateduser => res.json(updateduser))
-        .catch(err => console.log(err))
-
-})
-
-router.post('/:userId/bookings/add', (req, res) => {
-    const { userId } = req.params;
-    const bookingData = req.body;
-    
-    if (bookingData.children === 'No children') bookingData.children = 0;
-    dbServices.create(Booking, bookingData)
-        .then(response => {
-            dbServices.addToDbArray(User, userId, 'bookings', response.id)
-                .then(data => dbServices.getUpdatedUser(userId))
-                .then(updateduser => res.json(updateduser))
-                .catch(err => console.log(err))
-        })
-
-        .catch(err => console.log(err))
 })
 
 router.get('/:userId/get-info', (req, res) => {

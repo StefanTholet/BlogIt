@@ -1,5 +1,4 @@
 const User = require('../DB/models/User')
-const Booking = require('../DB/models/Booking');
 const Blog = require('../DB/models/Blog')
 function create(Model, details) {
     let model = new Model(details);
@@ -32,7 +31,7 @@ function removeFromDbArray(Model, id, arrayName, element) {
 }
 
 function updateDoc(Model, id, body) {
-    return Model.findOneAndUpdate({ _id: id }, body, { new: true }).populate('bookings').populate('blogPosts').lean()
+    return Model.findOneAndUpdate({ _id: id }, body, { new: true }).populate('blogPosts').lean()
 }
 
 function deleteDoc(Model, _id) { 
@@ -40,7 +39,7 @@ function deleteDoc(Model, _id) {
 }
 
 function getUpdatedUser (_id) {
-    return User.findById(_id).populate('bookings').populate('blogPosts').lean()
+    return User.findById(_id).populate('blogPosts').lean()
 }
 
 function getAllById(Model, ids) {

@@ -1,14 +1,17 @@
 import TextEditor from '../../Text-Editor/TextEditor'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
+import UserContext from '../../Contexts/UserContext';
 import { withRouter } from 'react-router-dom';
 import BlogPost from '../ReadBlogPost/BlogPost';
 import Grid from '@material-ui/core/Grid';
 import Alert from '@material-ui/lab/Alert';
 import useAlert from '../../../hooks/useAlert';
 import hideAlertAndRedirect from '../../services/all'
+import { addBlogPost } from '../../services/blogService'
 
 const CreateBlog = ({ history }) => {
-    
+
+    const [user, setUser] = useContext(UserContext)
     const { showAlert, setShowAlert, alertMessage } = useAlert();
 
     useEffect(() => {
@@ -33,23 +36,17 @@ const CreateBlog = ({ history }) => {
         postPreview.current.scrollIntoView({ behavior: 'smooth' })
     }
 
-    // const submitPost = (e) => {
-    //     e.preventDefault();
-    //     const body = compileBlogPost();
-    //     addBlogPost(body)
-    //         .then(updatedUser => {
-    //             setUser(updatedUser)
-    //             setShowAlert('success', 'Blog post created!')
-    //         })
-    // }
-    // const onTextEditorChangeHandler = (e, editor) => {
-    //     const data = editor.getData();
-    //     setBody(data)
-    // }
+    const submitPost = (blogPost) => {
+        addBlogPost(blogPost)
+            .then(updatedUser => {
+                setUser(updatedUser)
+                setShowAlert('success', 'Blog post created!')
+            })
+    }
 
     const sendBlogPost = (previewOrSubmit, blogPost) => {
         console.log(blogPost)
-        previewOrSubmit === 'Preview Post' ? setPreview(true) : setPreview(false); 
+        previewOrSubmit === 'Preview Post' ? setPreview(true) : submitPost(blogPost);
         setPost(blogPost)
     }
 

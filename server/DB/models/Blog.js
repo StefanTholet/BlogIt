@@ -25,7 +25,10 @@ const blogSchema = new mongoose.Schema({
         avatar: String,
         content: String,
         postedOnDate: String
-    }]
+    }],
+    category: {
+        type: String
+    }
 });
 
 module.exports = mongoose.model('Blog', blogSchema);

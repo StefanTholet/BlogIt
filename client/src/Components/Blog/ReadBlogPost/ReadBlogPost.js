@@ -4,7 +4,6 @@ import { getOnePost } from '../../services/blogService';
 import HeroImage from '../../HeroImage/HeroImage';
 import CommentsSection from '../Comments/CommentsSection';
 import { useState, useEffect, useContext } from 'react';
-import { decodeBlogPost } from '../../services/blogService';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Contexts/UserContext';
@@ -26,7 +25,7 @@ const ReadBlogPost = (props) => {
             getOnePost(postId)
                 .then(res => res.json())
                 .then(res => {
-                    setPost(decodeBlogPost(res));
+                    setPost((res));
                 })
                 .catch(err => console.log(err))
         }
