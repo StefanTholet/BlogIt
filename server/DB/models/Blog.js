@@ -9,6 +9,9 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please specify author of the post'],
     },
+    title: {
+        type: String
+    },
     createdOn: {
         type: String,
         require: [true, 'The date of the post creation is required.']

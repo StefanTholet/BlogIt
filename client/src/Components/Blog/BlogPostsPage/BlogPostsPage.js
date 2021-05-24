@@ -1,29 +1,17 @@
+import styles from './blogPostsPage.module.css';
 import PostPreviewCard from './PostPreviewCard';
 import { useState, useEffect, useContext } from 'react';
 import { getPosts } from '../../services/blogService';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Contexts/UserContext';
 import SectionHeader from '../Sections/SectionHeader'
-const useStyles = makeStyles({
-    "blog-posts-container": {
-        display: "flex",
-        flexWrap: "wrap",
-    },
-    "category-sections": {
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start"
-    }
-})
+
 
 
 const BlogPostsPage = ({ history }) => {
 
     const [user, setUser] = useContext(UserContext)
-
+    const [posts, setPosts] = useState([]);
     const [lifestylePosts, setLifestylePosts] = useState([])
     const [foodPosts, setFoodPosts] = useState([])
     const [sportsPosts, setSportsPosts] = useState([])
@@ -32,42 +20,52 @@ const BlogPostsPage = ({ history }) => {
         getPosts()
             .then(result => result.json())
             .then(allPosts => {
-                setLifestylePosts(filterPosts(allPosts, 'Lifestyle'));
-                setFoodPosts(filterPosts(allPosts, 'Food'));
-                setSportsPosts(filterPosts(allPosts, 'Sports'));
+                setPosts(allPosts)
             })
             .catch(err => console.log(err))
     }, []);
 
-    const filterPosts = (allPosts, typeOfPost) => {
-      return allPosts.filter(x => x.category === typeOfPost);
-    }
-    const classes = useStyles();
+    useEffect(() => {
+        setLifestylePosts(filterPosts(posts, 'Lifestyle'));
+        setFoodPosts(filterPosts(posts, 'Food'));
+        setSportsPosts(filterPosts(posts, 'Sports'));
+    }, [posts])
 
-    console.log(lifestylePosts)
+
+    const filterPosts = (allPosts, typeOfPost) => {
+        const filteredArray = allPosts.filter(x => x.category === typeOfPost);
+        return filteredArray
+    }
+
     return (
         <>
-            <div className={classes["category-sections"]}>
-                {lifestylePosts
-                    ?
-                    <SectionHeader sectionName={'Lifestyle'}>
-                        {lifestylePosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />
-                        )}
-                    </SectionHeader>
-                    :
-                    null
+            <div className={styles["category-sections"]}>
+                <SectionHeader sectionName={'Lifestyle'} />
+                <div className={styles['blog-posts-container']}>
+                    {
+                        lifestylePosts.length > 0 ?
+                            lifestylePosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />)
+                            : null
+                    }
+                </div>
+                {/* <RedBottomBorder width={"100%"} /> */}
+                <SectionHeader sectionName={'Food'} />
+                <div className={styles['blog-posts-container']}>
+                    {
+                        foodPosts ?
+                            foodPosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />)
+                            : null
+                    }
+                </div>
+                <SectionHeader sectionName={'Sports'} />
+                <div className={styles['blog-posts-container']}>
+                {
+                    sportsPosts ?
+                    sportsPosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />)
+                        : null
                 }
-                <SectionHeader sectionName={'Food'}>
-
-                </SectionHeader>
-                <SectionHeader sectionName={'Sports'}>
-
-                </SectionHeader>
+                </div>
             </div>
-            {/* <Grid className={classes['blog-posts-container']}>
-                {blogPosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />
-                )}
-            </Grid> */}
         </>
     );
 }

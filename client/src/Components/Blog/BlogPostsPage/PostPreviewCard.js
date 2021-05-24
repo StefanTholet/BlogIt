@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     'card-container': {
         marginTop: '1rem',
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     },
     'card-footer': {
         display: 'flex',
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const PostPreviewCard = ({ blogData, user, setUser }) => {
- 
+
     const [isFavorite, setFavorite] = useState(null)
 
     const { title, createdOnDate, imageUrl, altImage, content, _id } = blogData;
@@ -89,7 +89,7 @@ const PostPreviewCard = ({ blogData, user, setUser }) => {
     }
 
     return (
-        <Grid item className={classes['card-container']} xs={4}>
+        <Grid item className={classes['card-container']}>
             <Card className={classes.root}>
                 <CardHeader
                     avatar={

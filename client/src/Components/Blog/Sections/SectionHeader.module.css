@@ -4,7 +4,7 @@
 }
 
 .red-bottom-border {
-    width: 30%;
+    max-width: 28%;
     border-bottom: 2px solid #f44336;
 }
 

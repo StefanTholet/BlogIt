@@ -33,12 +33,6 @@ const Profile = ({ history }) => {
         hideAlertAndRedirect(setShowAlert);
     }, [showAlert])
 
-    useEffect(() => {
-        if (!user && !token) {
-            history.push('/login')
-        }
-    })
-
     const [isEditingGeneralInfo, setisEditingGeneralInfo] = useState(false);
 
 
