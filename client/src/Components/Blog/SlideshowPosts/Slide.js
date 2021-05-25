@@ -1,7 +1,7 @@
 import style from './SlideshowPosts.module.css';
 
 
-const Slide = ({ post }) => {
+const Slide = ({ post, onSlidingPostHover }) => {
     return (
         <div className={style.slide}
             style={{
@@ -10,6 +10,7 @@ const Slide = ({ post }) => {
                 backgroundSize: 'cover',
                 backgroundPosition: '50% 50%'
             }}
+            //  onMouseEnter={onSlidingPostHover}
         >
 
         </div>
