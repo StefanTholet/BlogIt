@@ -42,7 +42,7 @@ const SlideshowPosts = ({ posts }) => {
                 style={{ transform: `translate3d(${- translate3dPx}px, 0, 0)` }}>
                 {
                     posts.length > 0 ?
-                        posts.map(post => <Slide key={`${post.author}-${post.title}`} className={style.slide} post={post.imageUrl} />)
+                        posts.map(post => <Slide key={`${post.author}-${post.title}`} className={style.slide} post={post} />)
                         : null
                 }
 

@@ -1,0 +1,8 @@
+.section-posts-container {
+    display: flex;
+}
+
+.right-posts {
+    display: flex;
+}
+

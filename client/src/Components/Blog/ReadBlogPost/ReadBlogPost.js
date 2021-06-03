@@ -7,18 +7,15 @@ import { useState, useEffect, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Contexts/UserContext';
-import TokenContext from '../../Contexts/TokenContext'
-
 
 const ReadBlogPost = (props) => {
     const [post, setPost] = useState({});
     const { match, history } = props;
     const [user] = useContext(UserContext);
-    const [token] = useContext(TokenContext)
 
     //redirect if no user or token or fetch post
     useEffect(() => {
-        if (!user && !token) {
+        if (!user) {
             history.push('/login')
         } else {
             const { postId } = match.params;

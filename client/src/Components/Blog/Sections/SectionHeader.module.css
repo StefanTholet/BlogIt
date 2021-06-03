@@ -4,8 +4,9 @@
 }
 
 .red-bottom-border {
-    max-width: 28%;
+    max-width: 100%;
     border-bottom: 2px solid #f44336;
+    margin-bottom: 30px;
 }
 
 .section-heading {

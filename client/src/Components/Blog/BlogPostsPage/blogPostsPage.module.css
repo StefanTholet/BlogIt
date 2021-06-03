@@ -1,17 +1,32 @@
-.blog-posts-container div:not(:last-child) {
+.top-section-container div:not(:last-child) {
     margin-right: 10px;
 }
 
-.blog-posts-container {
+.top-section-container {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-category-sections {
+.category-sections {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start
+}
+
+
+
+.bottom-section-container div:not(:last-child) {
+    margin-right: 10px;
+}
+
+.bottom-section-container {
+    width: 100%;
+}
+
+.bottom-section {
+    width: 100%;
 }

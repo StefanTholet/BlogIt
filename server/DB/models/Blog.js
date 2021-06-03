@@ -20,6 +20,9 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Content is required!']
     },
+    postPreviewText: {
+        type: String
+    },
     imageUrl: {
         type: String
     },

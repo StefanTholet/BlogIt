@@ -1,11 +1,11 @@
 import styles from './blogPostsPage.module.css';
-import PostPreviewCard from './PostPreviewCard';
 import { useState, useEffect, useContext } from 'react';
 import { getPosts } from '../../services/blogService';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Contexts/UserContext';
 import SectionHeader from '../Sections/SectionHeader'
-
+import TopSection from '../Sections/TopSection';
+import BottomSection from '../Sections/BottomSection';
 
 
 const BlogPostsPage = ({ history }) => {
@@ -14,7 +14,8 @@ const BlogPostsPage = ({ history }) => {
     const [posts, setPosts] = useState([]);
     const [lifestylePosts, setLifestylePosts] = useState([])
     const [foodPosts, setFoodPosts] = useState([])
-    const [sportsPosts, setSportsPosts] = useState([])
+    const [travelPosts, setTravelPosts] = useState([])
+    const [fashionPosts, setFashionPosts] = useState([])
 
     useEffect(() => {
         getPosts()
@@ -28,45 +29,37 @@ const BlogPostsPage = ({ history }) => {
     useEffect(() => {
         setLifestylePosts(filterPosts(posts, 'Lifestyle'));
         setFoodPosts(filterPosts(posts, 'Food'));
-        setSportsPosts(filterPosts(posts, 'Sports'));
+        setFashionPosts(filterPosts(posts, 'Fashion'));
+        setTravelPosts(filterPosts(posts, 'Travel'));
     }, [posts])
 
-
+    console.log(travelPosts)
     const filterPosts = (allPosts, typeOfPost) => {
         const filteredArray = allPosts.filter(x => x.category === typeOfPost);
         return filteredArray
     }
 
     return (
-        <>
-            <div className={styles["category-sections"]}>
-                <SectionHeader sectionName={'Lifestyle'} />
-                <div className={styles['blog-posts-container']}>
-                    {
-                        lifestylePosts.length > 0 ?
-                            lifestylePosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />)
-                            : null
-                    }
+        <div className={styles["category-sections"]}>
+            <div className={styles['top-section-container']}>
+                <div className={styles['top-container']}>
+                    <SectionHeader sectionName={'Lifestyle'} />
+                    <TopSection posts={lifestylePosts} containerWidth={'375px'} />
                 </div>
-                {/* <RedBottomBorder width={"100%"} /> */}
-                <SectionHeader sectionName={'Food'} />
-                <div className={styles['blog-posts-container']}>
-                    {
-                        foodPosts ?
-                            foodPosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />)
-                            : null
-                    }
-                </div>
-                <SectionHeader sectionName={'Sports'} />
-                <div className={styles['blog-posts-container']}>
-                {
-                    sportsPosts ?
-                    sportsPosts.map(post => <PostPreviewCard blogData={post} key={post.title + post._id} user={user} setUser={setUser} />)
-                        : null
-                }
+                <div className={styles['top-container']}>
+                    <SectionHeader sectionName={'Fashion'} />
+                    <TopSection posts={fashionPosts} containerWidth={'375px'} />
                 </div>
             </div>
-        </>
+
+
+            <div className={styles['bottom-section-container']}>
+                <div className={styles['bottom-section-container']}>
+                    <SectionHeader sectionName={'Тravel'} />
+                    <BottomSection posts={travelPosts} containerWidth={'700px'}/>
+                </div>
+            </div>
+        </div>
     );
 }
 

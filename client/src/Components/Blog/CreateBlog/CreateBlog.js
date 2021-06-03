@@ -14,12 +14,12 @@ const CreateBlog = ({ history }) => {
     const [user, setUser] = useContext(UserContext)
     const { showAlert, setShowAlert, alertMessage } = useAlert();
 
-    useEffect(() => {
-        if (showAlert === 'success') {
-            return hideAlertAndRedirect(setShowAlert, showAlert, history, '/blog')
-        }
-        hideAlertAndRedirect(setShowAlert);
-    }, [showAlert])
+    // useEffect(() => {
+    //     if (showAlert === 'success') {
+    //         return hideAlertAndRedirect(setShowAlert, showAlert, history, '/blog')
+    //     }
+    //     hideAlertAndRedirect(setShowAlert);
+    // }, [showAlert])
 
     const [preview, setPreview] = useState(false);
     const [post, setPost] = useState({})

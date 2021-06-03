@@ -33,6 +33,7 @@ const TextEditor = ({ sendBlogPost, scrollToPreviewDiv }) => {
             imageUrl: form?.imageUrl?.value,
             category: form?.category?.value,
             content: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+            postPreviewText: convertToRaw(editorState.getCurrentContent()).blocks[0].text.substring(0, 105) + '...',
             author: `${user?.firstName} ${user?.lastName}`,
             authorImageUrl: user.imageUrl,
             createdOn: today,
@@ -95,8 +96,9 @@ const TextEditor = ({ sendBlogPost, scrollToPreviewDiv }) => {
                         onChange={handleSelectValueChange}
                     >
                         <MenuItem value={"Lifestyle"}>Lifestyle</MenuItem>
+                        <MenuItem value={"Travel"}>Travel</MenuItem>
+                        <MenuItem value={"Fashion"}>Fashion</MenuItem>
                         <MenuItem value={"Food"}>Food</MenuItem>
-                        <MenuItem value={"Sports"}>Sports</MenuItem>
                     </Select>
                 </div>
             </div>
