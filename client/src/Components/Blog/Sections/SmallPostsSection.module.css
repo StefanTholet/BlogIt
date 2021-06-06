@@ -1,0 +1,11 @@
+.small-posts-container {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.small-posts-container * {
+    /* flex-basis: 25%; */
+}

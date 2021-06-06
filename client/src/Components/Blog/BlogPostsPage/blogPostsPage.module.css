@@ -23,10 +23,8 @@
     margin-right: 10px;
 }
 
-.bottom-section-container {
+.bottom-section, .small-posts-section , .bottom-section-container {
     width: 100%;
 }
 
-.bottom-section {
-    width: 100%;
-}
+

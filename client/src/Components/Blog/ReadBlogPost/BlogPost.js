@@ -38,7 +38,7 @@ const useStyles = makeStyles(() => ({
 
 const BlogPost = ({ post }) => {
     const classes = useStyles();
-    console.log(post)
+    // console.log(post)
     return (
         <>
             <Grid container alignItems="center" spacing={4}

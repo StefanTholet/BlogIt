@@ -30,7 +30,6 @@ const GeneralInfo = ({ user, isEditing, editClickHandler, submitClickHandler }) 
                         label="Avatar Image URL"
                         name="imageUrl"
                         value={imageUrl}
-                        defaultValue=' '
                         variant="outlined"
                         autoFocus
                         style={{ marginBottom: '1rem' }}

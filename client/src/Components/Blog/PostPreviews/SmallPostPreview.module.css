@@ -7,25 +7,5 @@
     border-bottom: 1px solid #ececec;
 }
 
-.small-preview-image {
-    width: 120px;
-    height: 80px;
-    background-size: cover;
-    background-position: center center;
-}
 
-.small-preview-title-link {
-    font-size: 14px;
-}
 
-.post-date-and-author {
-    font-size: 12px;
-}
-
-.created-on {
-    font-size: 14px;
-}
-
-.small-preview-title-link a:visited {
-    color: #000000;
-}

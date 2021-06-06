@@ -14,16 +14,15 @@ import hideAlertAndRedirect from '../services/all'
 import Alert from '@material-ui/lab/Alert';
 const Profile = ({ history }) => {
 
-    const [user, setUser] = useContext(UserContext)
-    
+    const [user, setUser] = useContext(UserContext);
+    const [token] = useContext(TokenContext);
+
     useEffect(() => {
-        if (!user) {
+        if (!user && !token) {
             history.push('/login')
         }
     })
     
-    const [token] = useContext(TokenContext)
-
     const { showAlert, setShowAlert, alertMessage } = useAlert();
 
     useEffect(() => {

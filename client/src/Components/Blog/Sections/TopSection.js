@@ -18,7 +18,7 @@ const TopSection = ({ posts, containerWidth }) => {
             <LargePostPreview post={leftPost} containerWidth={containerWidth} />
             <div className={style["right-post"]}>
             {
-                rightPosts.map(x => <SmallPostPreview post={x} />)
+                rightPosts.map(x => <SmallPostPreview post={x} key={`topSection${x._id}`}/>)
             }
             </div>
         </div>

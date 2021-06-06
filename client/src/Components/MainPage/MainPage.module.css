@@ -5,23 +5,3 @@
     align-items: center;
 }
 
-.featured-posts {
-    margin: 50px 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-}
-
-.featured-posts h2, p {
-    color: black;
-
-}
-
-.featured-posts p {
-    max-width: 600px;
-    margin: 20px 0 0 0;
-    text-align: center;
-    line-height: 1.7;
-}

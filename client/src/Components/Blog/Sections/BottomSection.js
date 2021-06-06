@@ -9,9 +9,6 @@ const BottomSection = ({ posts, containerWidth }) => {
         setLargePostPreviews(mainPosts);
     }, [posts])
 
-    console.log(posts)
-    console.log(largePostPreviews)
-
     return (
         <div className={style["bottom-section-posts"]}>
             {

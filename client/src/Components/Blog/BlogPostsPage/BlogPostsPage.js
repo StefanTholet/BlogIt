@@ -6,8 +6,8 @@ import UserContext from '../../Contexts/UserContext';
 import SectionHeader from '../Sections/SectionHeader'
 import TopSection from '../Sections/TopSection';
 import BottomSection from '../Sections/BottomSection';
-
-
+import SmallPostsSection from '../Sections/SmallPostsSection';
+import HeadingWithDescription from '../../Typography/HeadingWithDescription';
 const BlogPostsPage = ({ history }) => {
 
     const [user, setUser] = useContext(UserContext)
@@ -33,7 +33,7 @@ const BlogPostsPage = ({ history }) => {
         setTravelPosts(filterPosts(posts, 'Travel'));
     }, [posts])
 
-    console.log(travelPosts)
+    console.log(foodPosts)
     const filterPosts = (allPosts, typeOfPost) => {
         const filteredArray = allPosts.filter(x => x.category === typeOfPost);
         return filteredArray
@@ -58,6 +58,10 @@ const BlogPostsPage = ({ history }) => {
                     <SectionHeader sectionName={'Тravel'} />
                     <BottomSection posts={travelPosts} containerWidth={'700px'}/>
                 </div>
+            </div>
+            <HeadingWithDescription heading={'Our Recipes'} description={'Check our new Food section for our hand-picked recipes!'}/>
+            <div className={styles['small-posts-section']}>
+                <SmallPostsSection posts={foodPosts}/>
             </div>
         </div>
     );

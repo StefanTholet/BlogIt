@@ -1,6 +1,6 @@
-/* .large-post {
-    width: 375px;
-} */
+.large-post {
+    border-bottom: 1px solid #DEDEDE;
+}
 
 .post-image {
     /* width: 375px;

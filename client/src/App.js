@@ -6,7 +6,7 @@ import BlogPostsPage from './Components/Blog/BlogPostsPage/BlogPostsPage';
 import ReadBlogPost from './Components/Blog/ReadBlogPost/ReadBlogPost';
 import CreateBlog from './Components/Blog/CreateBlog/CreateBlog';
 import Register from './Components/Auth/Register';
-import Login from './Components/Auth/LogIn';
+import Login from './Components/Auth/Login';
 import Profile from './Components/Profile/Profile';
 import { sendRequest } from './Components/services/server';
 import { signInUserAndGetUserData, registerUser } from './Components/services/user';
