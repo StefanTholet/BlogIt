@@ -11,16 +11,15 @@ const useStyles = makeStyles(() => ({
     'post-title': {
         color: 'black',
         alignSelf: 'start',
-        fontSize: '1.4rem'
     },
     'blog-container': {
         margin: '0 auto',
         marginTop: '2rem',
-        maxWidth: '40%'
+        maxWidth: '60%'
     },
     media: {
         width: '100%',
-        height: '250px',
+        minHeight: '400px',
         borderRadius: '5px'
     },
     'blog-content': {
@@ -38,15 +37,15 @@ const useStyles = makeStyles(() => ({
 
 const BlogPost = ({ post }) => {
     const classes = useStyles();
-    // console.log(post)
+
     return (
         <>
             <Grid container alignItems="center" spacing={4}
                 className={classes['blog-container']}
                 direction="column">
-                <Typography variant='h3' className={classes['post-title']}>
+                <h1 className={classes['post-title']}>
                     {post.title}
-                </Typography>
+                </h1>
                 <AuthorAvatar image={post.authorImageUrl} author={post.author} createdOn={post.createdOn} />
                 <CardMedia
                     className={classes.media}

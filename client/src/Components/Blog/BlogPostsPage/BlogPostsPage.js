@@ -8,6 +8,7 @@ import TopSection from '../Sections/TopSection';
 import BottomSection from '../Sections/BottomSection';
 import SmallPostsSection from '../Sections/SmallPostsSection';
 import HeadingWithDescription from '../../Typography/HeadingWithDescription';
+
 const BlogPostsPage = ({ history }) => {
 
     const [user, setUser] = useContext(UserContext)
@@ -33,7 +34,6 @@ const BlogPostsPage = ({ history }) => {
         setTravelPosts(filterPosts(posts, 'Travel'));
     }, [posts])
 
-    console.log(foodPosts)
     const filterPosts = (allPosts, typeOfPost) => {
         const filteredArray = allPosts.filter(x => x.category === typeOfPost);
         return filteredArray
@@ -51,7 +51,6 @@ const BlogPostsPage = ({ history }) => {
                     <TopSection posts={fashionPosts} containerWidth={'375px'} />
                 </div>
             </div>
-
 
             <div className={styles['bottom-section-container']}>
                 <div className={styles['bottom-section-container']}>

@@ -8,7 +8,6 @@ const useAlert = () => {
     const setAlertType = (type, message) => {
         setShowAlert(type);
         setAlertMessage(message);
-        console.log(showAlert, message);
     }
        
     return {
