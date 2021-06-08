@@ -7,7 +7,7 @@ import { updatePostWithComment } from '../../services/blogService';
 import { today } from '../../services/bookService';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core'
-
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
   'comment-section-container': {
     width: '100%',
@@ -65,7 +65,12 @@ const CommentsSection = ({ post, match, user }) => {
         variant="contained"
         onClick={showCommentBox}
       >
-        {comments ? 'Tell us what you think!' : 'Be the first person to comment!'}</Button>
+        {user ?
+          comments?.length > 0 ? 'Tell us what you think!' : 'Be the first person to comment!'
+          :
+          <Link to="/login">Please login to comment</Link>
+        }
+      </Button>
       {wantsToComment ? <NewComment submitComment={submitComment} avatar={avatar} /> : null}
       {comments ? comments.map(x => <OldComment key={post._id + x.author} comment={x} />) : null}
     </Grid>

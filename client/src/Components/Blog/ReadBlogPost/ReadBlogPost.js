@@ -1,7 +1,6 @@
 
 import BlogPost from './BlogPost';
 import { getOnePost } from '../../services/blogService';
-import HeroImage from '../../HeroImage/HeroImage';
 import CommentsSection from '../Comments/CommentsSection';
 import { useState, useEffect, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
