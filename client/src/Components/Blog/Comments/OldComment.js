@@ -1,6 +1,8 @@
 import { Avatar, Grid } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
+import ReplyAllRoundedIcon from '@material-ui/icons/ReplyAllRounded';
 const useStyles = makeStyles((theme) => ({
     'old-comment': {
         color: 'black',
@@ -52,6 +54,18 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '16px',
         paddingBottom: '40px'
     },
+    'reply-container': {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        padding: '0 11px 40px',
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    },
+
+    'reply-button': {
+        marginRight: '8px' 
+    },
     divider: {
         width: '100%',
     },
@@ -72,26 +86,25 @@ const OldComment = ({ comment }) => {
                 <div class={classes['author-container']}>
                     <Avatar className={classes.large} alt="Remy Sharp" src={comment.avatar} />
                     <div className={classes['content-metadata-flex']}>
-                    <div className={classes['meta-data']}>
-                        <h3 className={classes.author}>{comment.author}</h3>
-                        <p className={classes['comment-date']}>
-                            Posted on: {comment.postedOnDate}
-                        </p>
-                </div>
-                <div className={classes["content-container"]}>
-                <p className={classes.content} style={{}}>
-                    {comment.content}
-                </p>
-                </div>
+                        <div className={classes['meta-data']}>
+                            <h3 className={classes.author}>{comment.author}</h3>
+                            <p className={classes['comment-date']}>
+                                Posted on: {comment.postedOnDate}
+                            </p>
+                        </div>
+                        <div className={classes["content-container"]}>
+                            <p className={classes.content} style={{}}>
+                                {comment.content}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div style={{ height: '100%' }}>
-
-               
-
-
+                <div className={classes["reply-container"]}>
+                    <Link className={classes["reply-button"]} to="/">
+                        <ReplyAllRoundedIcon />
+                    </Link>
+                    <p>Reply</p>
+                </div>
             </div>
             <Divider className={classes.divider} />
         </Grid>
