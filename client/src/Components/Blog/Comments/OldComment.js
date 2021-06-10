@@ -1,4 +1,4 @@
-import { Avatar, Grid, Paper } from "@material-ui/core";
+import { Avatar, Grid } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles((theme) => ({
@@ -14,14 +14,14 @@ const useStyles = makeStyles((theme) => ({
     },
     'comment-header': {
         width: '100%',
-        // display: 'flex',
     },
     'meta-data': {
         width: '100%',
         padding: '0 11px 4px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        textAlign: 'center',
+        placeSelf: 'flex-start',
     },
     'author-container': {
         display: 'flex',
@@ -30,26 +30,35 @@ const useStyles = makeStyles((theme) => ({
     },
     'comment-date': {
         textAlign: "left",
+        fontSize: "13px",
         color: "gray",
     },
     author: {
         textAlign: "center",
-        fontSize: '0.8rem',
+        fontSize: '18px',
         fontWeight: '500',
         lineHeight: '0.8rem'
     },
+    'content-metadata-flex': {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    'content-container': {
+        paddingLeft: '11px'
+    },
     content: {
-        textAlign: "left",
+        textAlign: 'left',
+        fontSize: '16px',
         paddingBottom: '40px'
     },
     divider: {
         width: '100%',
-        marginBlock: '1rem'
     },
     large: {
         width: theme.spacing(7),
         height: theme.spacing(7),
-      },
+    },
 }))
 
 const OldComment = ({ comment }) => {
@@ -62,21 +71,26 @@ const OldComment = ({ comment }) => {
             <div className={classes["comment-header"]}>
                 <div class={classes['author-container']}>
                     <Avatar className={classes.large} alt="Remy Sharp" src={comment.avatar} />
+                    <div className={classes['content-metadata-flex']}>
                     <div className={classes['meta-data']}>
                         <h3 className={classes.author}>{comment.author}</h3>
                         <p className={classes['comment-date']}>
                             Posted on: {comment.postedOnDate}
                         </p>
+                </div>
+                <div className={classes["content-container"]}>
+                <p className={classes.content} style={{}}>
+                    {comment.content}
+                </p>
+                </div>
                     </div>
                 </div>
             </div>
 
             <div style={{ height: '100%' }}>
 
+               
 
-                <p className={classes.content} style={{}}>
-                    {comment.content}
-                </p>
 
             </div>
             <Divider className={classes.divider} />
