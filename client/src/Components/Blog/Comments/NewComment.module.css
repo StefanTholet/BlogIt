@@ -1,0 +1,14 @@
+.reply-container {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    height: 300px;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1475px;
+    width: 100%;
+    border: 1px solid black;
+}

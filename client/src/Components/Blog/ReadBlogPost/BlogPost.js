@@ -6,7 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { makeStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 const useStyles = makeStyles(() => ({
     'post-title': {
         color: 'black',
@@ -15,7 +15,8 @@ const useStyles = makeStyles(() => ({
     'blog-container': {
         margin: '0 auto',
         marginTop: '2rem',
-        maxWidth: '60%'
+        maxWidth: '60%',
+      
     },
     media: {
         width: '100%',
@@ -37,7 +38,6 @@ const useStyles = makeStyles(() => ({
 
 const BlogPost = ({ post }) => {
     const classes = useStyles();
-    console.log(post)
     return (
         <>
             <Grid container alignItems="center" spacing={4}
@@ -47,11 +47,16 @@ const BlogPost = ({ post }) => {
                     {post.title}
                 </h1>
                 <AuthorAvatar image={post.authorImageUrl} author={post.author} createdOn={post.createdOn} />
+                { post.imageUrl 
+                ?
                 <CardMedia
                     className={classes.media}
-                    image={post.imageUrl}
-                    title={post.title}
+                    image={post?.imageUrl}
+                    title={post?.title}
                 />
+                : 
+                <CircularProgress />
+                }
                     <div dangerouslySetInnerHTML={{__html: post.content}} style={{marginTop: "1rem", color: "black", width: "100%", alignText: "left"}} /> 
                 <Divider className={classes.divider} variant="middle" />
                 <Typography style={{ marginRight: 'auto', marginLeft: '1rem' }}>

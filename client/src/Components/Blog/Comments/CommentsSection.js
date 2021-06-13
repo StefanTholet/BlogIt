@@ -75,7 +75,7 @@ const CommentsSection = ({ post, match, user }) => {
         }
       </Button>
       {wantsToComment ? <NewComment submitComment={submitComment} avatar={avatar} /> : null}
-      {comments ? comments.map(x => <OldComment key={post._id + x.author} comment={x} />) : null}
+      {comments ? comments.map(x => <OldComment key={x._id + x.author} comment={x} />) : null}
     </Grid>
   );
 }

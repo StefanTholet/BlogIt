@@ -83,7 +83,7 @@ const OldComment = ({ comment }) => {
         <Grid container className={classes['old-comment']} wrap="nowrap" style={{ height: '100%' }} spacing={2}>
             <Divider className={classes.divider} />
             <div className={classes["comment-header"]}>
-                <div class={classes['author-container']}>
+                <div className={classes['author-container']}>
                     <Avatar className={classes.large} alt="Remy Sharp" src={comment.avatar} />
                     <div className={classes['content-metadata-flex']}>
                         <div className={classes['meta-data']}>
