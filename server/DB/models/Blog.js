@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const blogSchema = new mongoose.Schema({   
+const blogSchema = new mongoose.Schema({
     creator: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
@@ -25,6 +25,9 @@ const blogSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String
+    },
+    comments: {
+        type: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }]
     },
     category: {
         type: String

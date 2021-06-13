@@ -29,14 +29,16 @@ const CommentsSection = ({ post, match, user }) => {
 
   useEffect(() => {
     setComments(post.comments)
-  })
+  },[post])
 
   const classes = useStyles();
 
   const showCommentBox = () => {
     setCommentDecision(!wantsToComment);
   }
+  
   const avatar = user?.imageUrl;
+  
   const submitComment = (e) => {
     e.preventDefault();
     const { postId } = match.params;
@@ -45,8 +47,9 @@ const CommentsSection = ({ post, match, user }) => {
       author: `${user.firstName} ${user.lastName}`,
       avatar,
       content,
-      postedOnDate: today
+      userId: user._id
     }
+
     updatePostWithComment(postId, comment)
       .then(res => {
         setComments(currentComments => {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const commentSchema = new mongoose.Schema({  
+const commentSchema = new mongoose.Schema({
     blog: {
         type: mongoose.Types.ObjectId,
         ref: 'Blog'
@@ -13,8 +13,8 @@ const commentSchema = new mongoose.Schema({
         type: String,
     },
     createdOn: {
-        type: Date(),
-
+        type: Date,
+        default: Date.now
     },
     content: {
         type: String,
@@ -23,7 +23,10 @@ const commentSchema = new mongoose.Schema({
         author: String,
         avatar: String,
         content: String,
-        postedOnDate: Date()
+        postedOnDate: {
+            type: Date,
+            default: Date.now
+        }
     }],
 });
 

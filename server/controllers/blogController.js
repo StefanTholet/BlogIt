@@ -2,6 +2,7 @@ const router = require('express').Router();
 const dbServices = require('../services/db');
 
 const Blog = require('../DB/models/Blog');
+const Comment = require('../DB/models/Comment');
 const User = require('../DB/models/User');
 
 router.post('/add-blog-post', (req, res) => {
@@ -46,7 +47,8 @@ router.post('/get-favorites', (req, res) => {
     // console.log(req.body)
     dbServices.getAllById(Blog, req.body.posts)
         .then(data => {
-            res.json(data)})
+            res.json(data)
+        })
         .catch(err => console.log(err))
 })
 
@@ -64,10 +66,23 @@ router.get('/posts/:postId', (req, res) => {
 })
 
 router.post('/posts/:postId/submit-comment', (req, res) => {
-    const blogId = req.params.postId;
-    const comment = req.body;
-    dbServices.addToDbArray(Blog, blogId, 'comments', comment)
-            .then(result => res.json(result))
+    const commentData = req.body;
+    const { userId } = commentData;
+    const { postId } = req.params;
+    let commentId = '';
+    dbServices.create(Comment, commentData)
+        .then(comment => {
+            commentId = comment._id;
+            return dbServices.addToDbArray(Blog, postId, 'comments', commentId)
+        })
+        .then(rOne => {
+            console.log(commentData)
+            return dbServices.addToDbArray(User, userId, 'comments', commentId)
+        })
+        .then(rTwo => {
+            return dbServices.getUpdatedUser(userId)
+        })
+        .then(updatedUser => res.json(updatedUser))
         .catch(err => console.log(err))
 })
 

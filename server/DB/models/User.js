@@ -25,14 +25,17 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Password is required']
     },
     blogPosts: {
-        type: [{type: mongoose.Types.ObjectId, ref: 'Blog'}]
+        type: [{ type: mongoose.Types.ObjectId, ref: 'Blog' }]
     },
-    favoritePosts: [{ type: mongoose.Types.ObjectId}],
+    favoritePosts: [{ type: mongoose.Types.ObjectId }],
 
-    
     imageUrl: {
         type: String
     },
+    comments: {
+        type: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }]
+    },
+
     // likes: []
 })
 
