@@ -12,3 +12,71 @@
     width: 100%;
     border: 1px solid black;
 }
+
+.reply-area {
+    margin: 0 auto;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    height: calc(100% - 11px);
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-to {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+}
+
+.hide-preview {
+    max-width: 740px;
+}
+
+.reply-to .reply-details {
+    max-width: calc(100% - 175px);
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.reply-to .composer-action-title {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    max-width: 100%;
+}
+
+.reply-icon {
+    display: inline-flex;
+    min-width: auto;
+    border: none;
+}
+
+.reply-to .composer-action-title .action-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.toolbar-visible {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.editor {
+    display: flex;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.editor-container {
+    display: flex;
+    flex-grow: 1;
+    max-width: 100%;
+}

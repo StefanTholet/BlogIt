@@ -26,7 +26,6 @@ const TextEditor = ({ sendBlogPost, scrollToPreviewDiv }) => {
 
     const blogPostCompiler = (e) => {
         e.preventDefault()
-        console.log(user)
         const form = e.target;
         const blogPost = {
             title: form?.title?.value,

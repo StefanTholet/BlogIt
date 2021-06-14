@@ -74,7 +74,7 @@ const CommentsSection = ({ post, match, user }) => {
           <Link to="/login">Please login to comment</Link>
         }
       </Button>
-      {wantsToComment ? <NewComment submitComment={submitComment} avatar={avatar} /> : null}
+      {wantsToComment ? <NewComment submitComment={submitComment} avatar={avatar} postId={post._id} postTitle={post.title} /> : null}
       {comments ? comments.map(x => <OldComment key={x._id + x.author} comment={x} />) : null}
     </Grid>
   );

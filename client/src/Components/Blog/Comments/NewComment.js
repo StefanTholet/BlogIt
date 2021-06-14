@@ -3,6 +3,10 @@ import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import style from './NewComment.module.css';
+import { useState } from "react";
+import { Link } from 'react-router-dom';
+import ReplyAllRoundedIcon from '@material-ui/icons/ReplyAllRounded';
+import CommentEditor from './CommentEditor';
 // const useStyles = makeStyles(() => ({
 //     'new-comment': {
 //         color: 'black',
@@ -23,7 +27,9 @@ import style from './NewComment.module.css';
 //     }
 // }))
 
-const NewComment = ({submitComment, avatar}) => {
+const NewComment = ({ submitComment, avatar, postId, postTitle }) => {
+    const [previewClass, setPreviewClass] = useState('hide-preview')
+
     // const classes = useStyles();
 
     return (
@@ -46,9 +52,29 @@ const NewComment = ({submitComment, avatar}) => {
         //             </form>
         //         </Grid>     
         // </Paper>
-        <div className={style["reply-container"]}>
-            <div className={style["reply"]}>
-
+        <div className={`${style["reply-container"]} ${style[previewClass]}`}>
+            <div className={style["reply-area"]}>
+                <div className={style["composer-fields"]}>
+                    <div className={style["reply-to"]}>
+                        <div className={style["reply-details"]}>
+                            <div className={style["composer-action-title"]}>
+                                <div className={style["reply-icon"]}>
+                                    <ReplyAllRoundedIcon />
+                                </div>
+                                <span className={style["action-title"]}>
+                                    <Link to={`/blog/read-more/${postId}`}>{postTitle}</Link>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={style["toolbar-visible"]}>
+                    <div className={style["editor"]}>
+                        <div className={style["editor-container"]}>
+                        <CommentEditor />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );
