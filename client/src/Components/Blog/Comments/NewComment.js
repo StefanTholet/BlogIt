@@ -1,11 +1,10 @@
-import { Avatar, Grid, Paper } from "@material-ui/core";
+
 import { Button } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
 import style from './NewComment.module.css';
 import { useState } from "react";
 import { Link } from 'react-router-dom';
 import ReplyAllRoundedIcon from '@material-ui/icons/ReplyAllRounded';
+import DoubleArrowRoundedIcon from '@material-ui/icons/DoubleArrowRounded';
 import CommentEditor from './CommentEditor';
 // const useStyles = makeStyles(() => ({
 //     'new-comment': {
@@ -71,11 +70,22 @@ const NewComment = ({ submitComment, avatar, postId, postTitle }) => {
                 <div className={style["toolbar-visible"]}>
                     <div className={style["editor"]}>
                         <div className={style["editor-container"]}>
-                        <CommentEditor />
+                            <CommentEditor />
                         </div>
                     </div>
                 </div>
+                <div className={style["submit-panel"]}>
+                    <div className={style["save-or-cancel"]}>
+                        <Button variant="contained" className={style["reply-button"]}><ReplyAllRoundedIcon /> Reply</Button>
+                        <Button className={style["cancel-button"]}>cancel</Button>
+                    </div>
+                    <div>
+                    <Button className={style["preview-button"]}>show preview <DoubleArrowRoundedIcon fontSize="small"/></Button>
+
+                    </div>
+                </div>
             </div>
+           
         </div>
     );
 }

@@ -3,7 +3,7 @@ import { EditorState, convertToRaw } from 'draft-js';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from 'draftjs-to-html';
 import { useState } from 'react';
-
+import './NewCommentEditor.css'
 import Button from '@material-ui/core/Button';
 const CommentEditor = () => {
 
@@ -18,7 +18,7 @@ const CommentEditor = () => {
             editorState={editorState}
             toolbarClassName="toolbarClassName"
             wrapperClassName="text-editor-wrapper"
-            editorClassName="editor-text-field"
+            editorClassName="editor-text-field no-min-height"
             onEditorStateChange={onEditorStateChange}
             style={
                 { borderBottom: "1px solid black", }

@@ -21,3 +21,8 @@ li {
 a {
     text-decoration: none;
 }
+
+.rdw-editor-main {
+  height: 60% !important;
+}
+
