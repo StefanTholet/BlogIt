@@ -1,4 +1,7 @@
+
+
 .reply-container {
+    max-width: 740px;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -8,7 +11,6 @@
     left: 0;
     margin-left: auto;
     margin-right: auto;
-    max-width: 1475px;
     width: 100%;
     background-color: #fff;
     border: 1px solid #F1F1F1;
@@ -30,8 +32,8 @@
     margin-top: 0;
 }
 
-.hide-preview {
-    max-width: 740px;
+.show-preview {
+    height: auto;
 }
 
 .reply-to .reply-details {

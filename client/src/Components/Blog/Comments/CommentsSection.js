@@ -43,16 +43,9 @@ const CommentsSection = ({ post, match, user }) => {
 
   const avatar = user?.imageUrl;
 
-  const submitComment = (commentContent) => {
+  const submitComment = (comment) => {
     const { postId } = match.params;
-    const content = commentContent;
-    const comment = {
-      author: `${user.firstName} ${user.lastName}`,
-      avatar,
-      content,
-      userId: user._id
-    }
-
+    
     updatePostWithComment(postId, comment)
       .then(res => {
         setComments(currentComments => {
@@ -80,7 +73,7 @@ const CommentsSection = ({ post, match, user }) => {
       {wantsToComment ?
         <NewComment submitComment={submitComment}
           onCancelButtonClick={hideCommentBox}
-          avatar={avatar} postId={post._id}
+          avatar={avatar} 
           postTitle={post.title} user={user} />
         : null}
       {comments ? comments.map(x => <OldComment key={x._id + x.author} comment={x} />) : null}

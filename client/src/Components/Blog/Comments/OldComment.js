@@ -52,11 +52,20 @@ const useStyles = makeStyles((theme) => ({
     content: {
         textAlign: 'left',
         fontSize: '16px',
-        paddingBottom: '40px'
+        paddingBottom: '40px',
+        overflow: 'auto',
     },
+
     'reply-container': {
+        width: '100%',
         display: 'flex',
+        alignItems: 'center',
         justifyContent: 'flex-end',
+        marginLeft: 'auto',
+        alignSelf: 'flex-start',
+    },
+    reply: {
+        display: 'inline-flex',
         padding: '0 11px 40px',
         '&:hover': {
             cursor: 'pointer'
@@ -99,10 +108,12 @@ const OldComment = ({ comment }) => {
                     </div>
                 </div>
                 <div className={classes["reply-container"]}>
+                <span className={classes["reply"]}>
                     <Link className={classes["reply-button"]} to="/">
                         <ReplyAllRoundedIcon />
                     </Link>
                     <p>Reply</p>
+                </span>
                 </div>
             </div>
             <Divider className={classes.divider} />
