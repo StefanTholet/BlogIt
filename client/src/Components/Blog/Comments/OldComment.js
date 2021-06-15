@@ -93,9 +93,8 @@ const OldComment = ({ comment }) => {
                             </p>
                         </div>
                         <div className={classes["content-container"]}>
-                            <p className={classes.content} style={{}}>
-                                {comment.content}
-                            </p>
+                            <div dangerouslySetInnerHTML={{__html: comment.content}} className={classes.content} style={{}}>
+                            </div>
                         </div>
                     </div>
                 </div>

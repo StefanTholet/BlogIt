@@ -1,17 +1,8 @@
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw } from 'draft-js';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import draftToHtml from 'draftjs-to-html';
-import { useState } from 'react';
 import './NewCommentEditor.css'
-import Button from '@material-ui/core/Button';
-const CommentEditor = () => {
 
-    const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
-    const onEditorStateChange = (editorState) => {
-        setEditorState(editorState)
-    }
+const CommentEditor = ({ onEditorStateChange, editorState }) => {
 
     return (
         <Editor
@@ -30,7 +21,7 @@ const CommentEditor = () => {
                 }
             }
             }
-                />
+        />
     );
 }
 

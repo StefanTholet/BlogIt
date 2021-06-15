@@ -29,20 +29,23 @@ const CommentsSection = ({ post, match, user }) => {
 
   useEffect(() => {
     setComments(post.comments)
-  },[post])
+  }, [post])
 
   const classes = useStyles();
 
   const showCommentBox = () => {
     setCommentDecision(!wantsToComment);
   }
-  
+
+  const hideCommentBox = () => {
+    setCommentDecision(decsion => false)
+  }
+
   const avatar = user?.imageUrl;
-  
-  const submitComment = (e) => {
-    e.preventDefault();
+
+  const submitComment = (commentContent) => {
     const { postId } = match.params;
-    const content = e.target.comment.value;
+    const content = commentContent;
     const comment = {
       author: `${user.firstName} ${user.lastName}`,
       avatar,
@@ -74,7 +77,12 @@ const CommentsSection = ({ post, match, user }) => {
           <Link to="/login">Please login to comment</Link>
         }
       </Button>
-      {wantsToComment ? <NewComment submitComment={submitComment} avatar={avatar} postId={post._id} postTitle={post.title} /> : null}
+      {wantsToComment ?
+        <NewComment submitComment={submitComment}
+          onCancelButtonClick={hideCommentBox}
+          avatar={avatar} postId={post._id}
+          postTitle={post.title} user={user} />
+        : null}
       {comments ? comments.map(x => <OldComment key={x._id + x.author} comment={x} />) : null}
     </Grid>
   );
