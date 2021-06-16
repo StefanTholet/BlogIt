@@ -9,7 +9,7 @@ import CommentEditor from './CommentEditor';
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import OldComment from './OldComment';
-const NewComment = ({ submitComment, postId, postTitle, onCancelButtonClick, user }) => {
+const NewComment = ({ submitComment, postId, postTitle, onCancelButtonClick, user, oldComment }) => {
 
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -30,20 +30,22 @@ const NewComment = ({ submitComment, postId, postTitle, onCancelButtonClick, use
     }
 
     const sendCommentToCommentSection = (e) => {
-        compileCommentContent(e);
-        submitComment(comment);
+        const newComment = compileCommentContent(e);
+        submitComment(newComment);
     }
-
+ 
     const compileCommentContent = (e) => {
         e.preventDefault();
         const content = draftToHtml(convertToRaw(editorState.getCurrentContent()));
-        const comment = {
+        const newComment = {
             author: `${user.firstName} ${user.lastName}`,
             avatar: user.imageUrl,
             content,
-            userId: user._id
+            userId: user._id,
+            isReplyTo: oldComment._id
         }
-        return setComment(comment);
+        setComment(newComment);
+        return newComment;
     }
 
     return (

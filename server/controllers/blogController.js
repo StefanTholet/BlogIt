@@ -67,7 +67,9 @@ router.get('/posts/:postId', (req, res) => {
 
 router.post('/posts/:postId/submit-comment', (req, res) => {
     const commentData = req.body;
-    const { userId } = commentData;
+    const { userId, isReplyTo } = commentData;
+    console.log(commentData)
+    console.log(isReplyTo)
     const { postId } = req.params;
     let commentId = '';
     dbServices.create(Comment, commentData)
@@ -75,11 +77,13 @@ router.post('/posts/:postId/submit-comment', (req, res) => {
             commentId = comment._id;
             return dbServices.addToDbArray(Blog, postId, 'comments', commentId)
         })
-        .then(rOne => {
-            console.log(commentData)
+        .then(addedCommentToBlog => {
             return dbServices.addToDbArray(User, userId, 'comments', commentId)
         })
-        .then(rTwo => {
+        .then(addedCommentToUser => {
+            return dbServices.addToDbArray(Comment, isReplyTo, 'replies', commentId)
+        })
+        .then(addedReplyToComment => {
             return dbServices.getUpdatedUser(userId)
         })
         .then(updatedUser => res.json(updatedUser))

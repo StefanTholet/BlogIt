@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
+    id: mongoose.Types.ObjectId,
     blog: {
         type: mongoose.Types.ObjectId,
         ref: 'Blog'
+    },
+    isReplyTo: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Comment'
     },
     creator: {
         type: mongoose.Types.ObjectId,
@@ -19,15 +24,8 @@ const commentSchema = new mongoose.Schema({
     content: {
         type: String,
     },
-    replys: [{
-        author: String,
-        avatar: String,
-        content: String,
-        postedOnDate: {
-            type: Date,
-            default: Date.now
-        }
-    }],
+    replies: { 
+        type: [{ type: mongoose.Types.ObjectId, ref: 'Comment' }] },
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

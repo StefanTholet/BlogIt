@@ -26,35 +26,40 @@ const CommentsSection = ({ post, match, user }) => {
 
   const [wantsToComment, setCommentDecision] = useState(false);
   const [comments, setComments] = useState(null);
-
+  const [isReplyingToComment, setIsReplyingToComment] = useState(false);
+  console.log(comments)
   useEffect(() => {
     setComments(post.comments)
   }, [post])
 
   const classes = useStyles();
 
-  const showCommentBox = () => {
-    setCommentDecision(!wantsToComment);
-  }
-
-  const hideCommentBox = () => {
-    setCommentDecision(decsion => false)
+  const showOrHideCommentBox = (oldComment) => {
+    if (oldComment && !oldComment.target) {
+      setIsReplyingToComment(oldComment)
+    }
+    if (wantsToComment) {
+      setCommentDecision(false);
+      setIsReplyingToComment(null);
+      return;
+    }
+    setCommentDecision(true);
   }
 
   const avatar = user?.imageUrl;
 
-  const submitComment = (comment) => {
+  const submitComment = ( comment ) => {
     const { postId } = match.params;
     
-    updatePostWithComment(postId, comment)
-      .then(res => {
-        setComments(currentComments => {
-          currentComments.push(comment);
-          return currentComments;
+      updatePostWithComment(postId, comment)
+        .then(res => {
+          setComments(currentComments => {
+            currentComments.push(comment);
+            return currentComments;
+          })
+          setCommentDecision(!wantsToComment)
         })
-        setCommentDecision(!wantsToComment)
-      })
-      .catch(err => console.log(err))
+        .catch(err => console.log(err))
   }
 
   return (
@@ -62,7 +67,7 @@ const CommentsSection = ({ post, match, user }) => {
       <h1>Comments</h1>
       <Button className={classes['comment-toggle']}
         variant="contained"
-        onClick={showCommentBox}
+        onClick={showOrHideCommentBox}
       >
         {user ?
           comments?.length > 0 ? 'Tell us what you think!' : 'Be the first person to comment!'
@@ -72,11 +77,12 @@ const CommentsSection = ({ post, match, user }) => {
       </Button>
       {wantsToComment ?
         <NewComment submitComment={submitComment}
-          onCancelButtonClick={hideCommentBox}
-          avatar={avatar} 
-          postTitle={post.title} user={user} />
+          onCancelButtonClick={showOrHideCommentBox}
+          avatar={avatar}
+          postTitle={post.title} user={user}
+          oldComment={isReplyingToComment} />
         : null}
-      {comments ? comments.map(x => <OldComment key={x._id + x.author} comment={x} />) : null}
+      {comments ? comments.map(x => <OldComment key={x._id + x.author} comment={x} showCommentBox={showOrHideCommentBox} />) : null}
     </Grid>
   );
 }

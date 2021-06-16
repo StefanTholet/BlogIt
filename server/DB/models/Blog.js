@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const blogSchema = new mongoose.Schema({
+    id: mongoose.Types.ObjectId,
     creator: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
