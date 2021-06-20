@@ -7,11 +7,11 @@ import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Contexts/UserContext';
 
-const ReadBlogPost = (props) => {
+const ReadBlogPost = (props, ) => {
     const [post, setPost] = useState({});
-    const { match, history } = props;
+    const { match, } = props;
     const [user] = useContext(UserContext);
-    
+
     useEffect(() => {
             const { postId } = match.params;
             getOnePost(postId)

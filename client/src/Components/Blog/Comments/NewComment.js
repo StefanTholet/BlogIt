@@ -9,8 +9,9 @@ import CommentEditor from './CommentEditor';
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import OldComment from './OldComment';
+import { today } from '../../services/blogService';
 const NewComment = ({ submitComment, postId, postTitle, onCancelButtonClick, user, oldComment }) => {
-
+    
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
     const [showPreview, setShowPreview] = useState(false);
@@ -41,8 +42,9 @@ const NewComment = ({ submitComment, postId, postTitle, onCancelButtonClick, use
             author: `${user.firstName} ${user.lastName}`,
             avatar: user.imageUrl,
             content,
+            createdOn: today,
             userId: user._id,
-            isReplyTo: oldComment._id
+            isReplyTo: oldComment._id || null 
         }
         setComment(newComment);
         return newComment;

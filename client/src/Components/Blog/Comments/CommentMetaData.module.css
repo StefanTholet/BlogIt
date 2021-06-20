@@ -1,0 +1,20 @@
+.content-metadata-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.meta-data {
+    width: 100%;
+    padding: 0 11px 4px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    place-self: flex-start;
+}
+
+.comment-date {
+    text-align: left;
+    font-size: 13px;
+    color: gray;
+}

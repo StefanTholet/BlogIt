@@ -4,10 +4,11 @@ import NewComment from './NewComment'
 import Button from '@material-ui/core/Button';
 import { useEffect, useState } from "react";
 import { updatePostWithComment } from '../../services/blogService';
-import { today } from '../../services/bookService';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom';
+
+
 const useStyles = makeStyles({
   'comment-section-container': {
     width: '100%',
@@ -32,6 +33,10 @@ const CommentsSection = ({ post, match, user }) => {
     setComments(post.comments)
   }, [post])
 
+  useEffect(() => {
+
+  })
+
   const classes = useStyles();
 
   const showOrHideCommentBox = (oldComment) => {
@@ -48,18 +53,25 @@ const CommentsSection = ({ post, match, user }) => {
 
   const avatar = user?.imageUrl;
 
-  const submitComment = ( comment ) => {
+  const submitComment = (comment) => {
     const { postId } = match.params;
-    
-      updatePostWithComment(postId, comment)
-        .then(res => {
+
+    updatePostWithComment(postId, comment)
+      .then(res => {
+        if (comment.isReplyTo) {
           setComments(currentComments => {
-            currentComments.push(comment);
-            return currentComments;
+            currentComments.find(x =>
+              x._id === comment.isReplyTo).replies.push(comment)
+              return currentComments
           })
-          setCommentDecision(!wantsToComment)
+        }
+        setComments(currentComments => {
+          currentComments.push(comment);
+          return currentComments;
         })
-        .catch(err => console.log(err))
+        setCommentDecision(!wantsToComment)
+      })
+      .catch(err => console.log(err))
   }
 
   return (
@@ -82,7 +94,7 @@ const CommentsSection = ({ post, match, user }) => {
           postTitle={post.title} user={user}
           oldComment={isReplyingToComment} />
         : null}
-      {comments ? comments.map(x => <OldComment key={x._id + x.author} comment={x} showCommentBox={showOrHideCommentBox} />) : null}
+      {comments ? comments.map(x => <OldComment key={x._id + x.author} comment={x} commentAuthor={`${user?.firstName} ${user?.lastName}`} showCommentBox={showOrHideCommentBox} />) : null}
     </Grid>
   );
 }

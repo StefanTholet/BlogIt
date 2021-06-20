@@ -1,4 +1,4 @@
-import { today } from '../services/bookService';
+import { today } from '../services/blogService';
 import './TextEditor.css';
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from 'draft-js';

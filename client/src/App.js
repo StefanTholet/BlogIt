@@ -14,10 +14,11 @@ import { useState, useEffect } from 'react';
 import UserContext from './Components/Contexts/UserContext';
 import TokenContext from './Components/Contexts/TokenContext'
 import useToken from './hooks/useToken';
+import { useContext } from 'react';
 
 function App(props) {
 
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(null);
   const { token, setToken } = useToken();
 
   useEffect(() => {
@@ -50,7 +51,7 @@ function App(props) {
           setToken(userData._id)
           return `Welcome back, ${userData.firstName}`
         }
-       
+
       })
       .catch(err => 'Incorrect username or password')
   }
@@ -66,7 +67,7 @@ function App(props) {
               <Route path="/blog/read-more/:postId" component={ReadBlogPost} />
               <Route path="/create-blog" component={CreateBlog} exact />
               <Route path="/users/:userId/profile" component={Profile} exact></Route>
-              <Route path="/register" component={() => <Register onRegistrationSubmitHandler={onRegistrationSubmitHandler} userId={user?._id}/>} exact></Route>
+              <Route path="/register" component={() => <Register onRegistrationSubmitHandler={onRegistrationSubmitHandler} userId={user?._id} />} exact></Route>
               <Route path="/login" render={() => <Login onLoginSubmitForm={onLoginSubmitForm} userId={user?._id} />} exact></Route>
             </Switch>
           </div>

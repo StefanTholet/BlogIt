@@ -1,0 +1,35 @@
+.bottom-menu {
+    display: flex;
+    justify-content: space-between
+}
+
+.replies-button {
+    margin-left: 60px;
+}
+
+.replies-button:hover, .reply:hover  {
+    cursor: pointer;
+}
+
+.show-replies {
+    min-width: 150px;
+    align-items: center;
+    display: flex;
+}
+
+.reply-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+    align-self: flex-start;
+}
+
+.reply {
+    display: inline-flex;
+    padding: 0 11px 40px;
+}
+
+
+

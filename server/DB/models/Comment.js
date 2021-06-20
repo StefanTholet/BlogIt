@@ -18,8 +18,7 @@ const commentSchema = new mongoose.Schema({
         type: String,
     },
     createdOn: {
-        type: Date,
-        default: Date.now
+        type: String
     },
     content: {
         type: String,

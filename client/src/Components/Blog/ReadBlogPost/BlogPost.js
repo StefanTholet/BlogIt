@@ -1,4 +1,4 @@
-import { today } from '../../services/bookService';
+import { today } from '../../services/blogService';
 import Typography from '@material-ui/core/Typography';
 import AuthorAvatar from '../AuthorAvatar/AuthorAvatar';
 import Grid from '@material-ui/core/Grid';

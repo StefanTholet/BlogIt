@@ -1,7 +1,7 @@
 // import { today } from './bookService';
 import { sendRequest } from './server'
 const postRequest = ['POST', 'application/json'];
-
+const today = `${new Date().getMonth() + 1}-${new Date().getDate() + 1}-${new Date().getFullYear()}`;
 
 function getOnePost(postId) {
     return sendRequest(`/blog/posts/${postId}`)
@@ -43,5 +43,6 @@ export {
     deleteBlogPost,
     addBlogPost,
     getFavouritePosts,
-    deleteFavoritePost
+    deleteFavoritePost,
+    today
 }

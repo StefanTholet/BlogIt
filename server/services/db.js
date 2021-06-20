@@ -13,7 +13,14 @@ function getOne(Model, id) {
     return Model.findById(id).lean();
 }
 function getOneWithComments(blogId) {
-    return Blog.findById(blogId).populate('comments').lean();
+    return Blog.findById(blogId).populate({    
+        path: 'comments',
+        model: 'Comment',
+        populate: {
+            path: 'replies',
+            model: 'Comment'
+        }
+    }).lean();
 }
 
 function addToDbArray(Model, id, arrayName, element) {
