@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Logn = ({ onLoginSubmitForm, history, userId }) => {
+const Login = ({ onLoginSubmitForm, history, userId }) => {
 
 
     const { showAlert, setShowAlert, alertMessage } = useAlert();
@@ -120,4 +120,4 @@ const Logn = ({ onLoginSubmitForm, history, userId }) => {
     );
 }
 
-export default withRouter(Logn);
+export default withRouter(Login);
