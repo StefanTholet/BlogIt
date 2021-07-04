@@ -7,7 +7,7 @@
 }
 
 .slideshow-slider {
-    width: 4333px;
+    /* width: 4333px; */
     white-space: nowrap;
     transition: all 0.8s ease 0s;
 }
@@ -16,7 +16,7 @@
     height: 356px;
     width: 360px;
     display: inline-block;
-    margin-right: 5px;
+    /* margin-right: 5px; */
 }
 
 .slide:hover {

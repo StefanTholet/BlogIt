@@ -44,11 +44,11 @@ const BlogPostsPage = ({ history }) => {
             <div className={styles['top-section-container']}>
                 <div className={styles['top-container']}>
                     <SectionHeader sectionName={'Lifestyle'} />
-                    <TopSection posts={lifestylePosts} containerWidth={'375px'} />
+                    <TopSection posts={lifestylePosts} containerWidth={'360px'} />
                 </div>
                 <div className={styles['top-container']}>
                     <SectionHeader sectionName={'Fashion'} />
-                    <TopSection posts={fashionPosts} containerWidth={'375px'} />
+                    <TopSection posts={fashionPosts} containerWidth={'360px'} />
                 </div>
             </div>
 

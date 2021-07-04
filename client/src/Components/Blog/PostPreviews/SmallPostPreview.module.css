@@ -1,7 +1,7 @@
 .small-preview-container {
-    width: 250px;
+    width: 180px;
     /* display: flex; */
-    flex-direction: column;
+    /* flex-direction: column; */
     overflow: hidden;
     margin-bottom: 15px;
     border-bottom: 1px solid #ececec;

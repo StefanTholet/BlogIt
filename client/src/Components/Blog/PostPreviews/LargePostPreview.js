@@ -14,6 +14,7 @@ const LargePostPreview = ({ post, containerWidth, containerBorder, imageWidth, i
                 style={{
                     backgroundImage: `url(${imageUrl})`,
                     width: imageWidth ? imageWidth : '100%',
+                    maxWidth: '360px',
                     height: imageHeight ? imageHeight : '250px',
                     borderBottom: containerBorder ? containerBorder : 'none'
                 }} />

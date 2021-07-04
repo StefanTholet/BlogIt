@@ -20,7 +20,7 @@ const Header = () => {
                 {user
                     ?
                     <ul className={style["nav-items"]}>
-                        <li><NavLink className={style["nav-menu-item"]} to="/blog">'Blog|</NavLink></li>
+                        {/* <li><NavLink className={style["nav-menu-item"]} to="/blog">'Blog|</NavLink></li> */}
                         <li><NavLink className={style["nav-menu-item"]} to="/create-blog">Add Blog Post|</NavLink></li>
                         <li onClick={onLogoutClick}><NavLink className={style["nav-menu-item"]} to="/logout">Logout</NavLink></li>
                     </ul>

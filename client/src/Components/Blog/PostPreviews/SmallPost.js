@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import style from './SmallPostPost.module.css';
+import style from './SmallPost.module.css';
 const SmallPost = ({post}) => {
 
     return (
         <div>
-            <div className={style["small-post-image"]} style={{ backgroundImage: `url(${post?.imageUrl})` }} />
+            <div className={style["small-post-image"]} style={{ backgroundImage: `url(${post?.imageUrl})`, display: 'block' }} />
             <div className={style["small-post-details"]}>
                 <h3 className={style["small-post-title-link"]}>
                     <NavLink to="/">{post?.title}</NavLink>

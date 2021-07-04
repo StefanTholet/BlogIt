@@ -24,7 +24,7 @@ const SlideshowPosts = ({ posts }) => {
                 return
             }
             setTranslate3dPx((prevTranslate3dPx) =>
-                prevTranslate3dPx === totalTranslate3dPx ? 0 : translate3dPx + 365
+                prevTranslate3dPx === totalTranslate3dPx ? 0 : translate3dPx + 360
             )
         },
             2500
