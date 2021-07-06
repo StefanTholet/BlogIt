@@ -1,0 +1,18 @@
+.section-posts-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.right-post {
+    min-width: 223px;
+}
+
+@media screen and (max-width: 598px) {
+    .right-post {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .section-posts-container {
+    .width: 100%;        
+    }
+  }

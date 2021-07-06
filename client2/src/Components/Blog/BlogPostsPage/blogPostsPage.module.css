@@ -1,3 +1,4 @@
+
 .top-section-container {
     width: 100%;
     display: flex;
@@ -12,12 +13,18 @@
     align-items: flex-start
 }
 
-.bottom-section, .small-posts-section, .bottom-section-container {
+.top-container {
     width: 100%;
 }
 
-/* @media only screen and (min-width: 370px) {
-    .bottom-section-container div:not(:last-child), .top-section-container div:not(:last-child) {
-        margin-right: 10px;
-    }
-} */
+.bottom-section-container div:not(:last-child) {
+    margin-right: 10px;
+}
+
+.bottom-section-container {
+    width: 100%;
+}
+
+.bottom-section {
+    width: 100%;
+}

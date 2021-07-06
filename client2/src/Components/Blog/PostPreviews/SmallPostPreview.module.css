@@ -1,0 +1,46 @@
+.small-preview-container {
+    width: 250px;
+    /* display: flex; */
+    flex-direction: column;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ececec;
+}
+
+.small-preview-image {
+    width: 120px;
+    height: 80px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.small-preview-title-link {
+    font-size: 14px;
+}
+
+.post-date-and-author {
+    font-size: 12px;
+}
+
+.created-on {
+    font-size: 14px;
+}
+
+.small-preview-title-link a:visited {
+    color: #000000;
+}
+
+@media screen and (max-width: 624px) {
+    .small-preview-container {
+        display: flex;
+        align-items: center;
+        width: 100%;   
+        align-items: center;
+    }
+    .small-preview-image {
+        width: 80%;
+        height: 120px;
+        background-size: cover;
+        background-position: center center;
+    }
+  }
