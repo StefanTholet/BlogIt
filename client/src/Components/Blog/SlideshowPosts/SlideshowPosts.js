@@ -23,17 +23,21 @@ const SlideshowPosts = ({ posts }) => {
                 clearTimeout(timer)
                 return
             }
-            setTranslate3dPx((prevTranslate3dPx) =>
-                prevTranslate3dPx === totalTranslate3dPx ? 0 : translate3dPx + 360
+            setTranslate3dPx((prevTranslate3dPx) => {
+                return prevTranslate3dPx >= totalTranslate3dPx ? 0 : prevTranslate3dPx + 360
+            }
             )
         },
-            2500
+            4500
         );
     }
 
     useEffect(() => {
         setTotalTranslate3dPx(posts.length * 365)
-        slideshowTimer(totalTranslate3dPx)
+    }, [posts])
+
+    useEffect(() => {
+        slideshowTimer();
     }, [translate3dPx, posts]);
 
     return (
@@ -41,12 +45,9 @@ const SlideshowPosts = ({ posts }) => {
             <div className={style["slideshow-slider"]}
                 style={{ transform: `translate3d(${- translate3dPx}px, 0, 0)` }}>
                 {
-                    posts.length > 0 ?
-                        posts.map(post => <Slide key={`${post.author}-${post.title}`} className={style.slide} post={post} />)
-                        : null
+                    posts.length > 0 &&
+                    posts.map(post => <Slide key={`${post.author}-${post.title}`} className={style.slide} post={post} />)
                 }
-
-
             </div>
         </div>
     )

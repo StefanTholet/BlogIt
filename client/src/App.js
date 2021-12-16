@@ -2,7 +2,7 @@ import style from './App.module.css';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import MainPage from './Components/MainPage/MainPage'
-import BlogPostsPage from './Components/Blog/BlogPostsPage/BlogPostsPage';
+import BlogPostsSection from './Components/Blog/BlogPostsSection/BlogPostsSection';
 import ReadBlogPost from './Components/Blog/ReadBlogPost/ReadBlogPost';
 import CreateBlog from './Components/Blog/CreateBlog/CreateBlog';
 import Register from './Components/Auth/Register';
@@ -63,7 +63,7 @@ function App(props) {
             <Header />
             <Switch>
               <Route path="/" component={MainPage} exact />
-              <Route path="/blog" component={BlogPostsPage} exact />
+              <Route path="/blog" component={BlogPostsSection} exact />
               <Route path="/blog/read-more/:postId" component={ReadBlogPost} />
               <Route path="/create-blog" component={CreateBlog} exact />
               <Route path="/users/:userId/profile" component={Profile} exact></Route>

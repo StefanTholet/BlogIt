@@ -1,6 +1,5 @@
 import styles from './blogPostsPage.module.css';
 import { useState, useEffect, useContext } from 'react';
-import { getPosts } from '../../services/blogService';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Contexts/UserContext';
 import SectionHeader from '../Sections/SectionHeader'
@@ -9,39 +8,33 @@ import BottomSection from '../Sections/BottomSection';
 import SmallPostsSection from '../Sections/SmallPostsSection';
 import HeadingWithDescription from '../../Typography/HeadingWithDescription';
 
-const BlogPostsPage = ({ history }) => {
+import ToplogPostsPreview from '../BlogPostsPreviews/ToplogPostsPreview'
 
-    const [user, setUser] = useContext(UserContext)
-    const [posts, setPosts] = useState([]);
+const BlogPostsSection = ({ postsList = [] }) => {
+
     const [lifestylePosts, setLifestylePosts] = useState([])
     const [foodPosts, setFoodPosts] = useState([])
     const [travelPosts, setTravelPosts] = useState([])
     const [fashionPosts, setFashionPosts] = useState([])
-
+    console.log(lifestylePosts);
     useEffect(() => {
-        getPosts()
-            .then(result => result.json())
-            .then(allPosts => {
-                setPosts(allPosts)
-            })
-            .catch(err => console.log(err))
-    }, []);
+        setLifestylePosts(filterPosts('Lifestyle'));
+        setFoodPosts(filterPosts('Food'));
+        setFashionPosts(filterPosts('Fashion'));
+        setTravelPosts(filterPosts('Travel'));
+    }, [postsList])
 
-    useEffect(() => {
-        setLifestylePosts(filterPosts(posts, 'Lifestyle'));
-        setFoodPosts(filterPosts(posts, 'Food'));
-        setFashionPosts(filterPosts(posts, 'Fashion'));
-        setTravelPosts(filterPosts(posts, 'Travel'));
-    }, [posts])
-
-    const filterPosts = (allPosts, typeOfPost) => {
-        const filteredArray = allPosts.filter(x => x.category === typeOfPost);
+    const filterPosts = (typeOfPost) => {
+        const filteredArray = postsList?.filter(x => x.category === typeOfPost);
         return filteredArray
     }
 
     return (
         <div className={styles["category-sections"]}>
-            <div className={styles['top-section-container']}>
+            {
+                [{ lifestylePosts }, { fashionPosts }].map(posts => <ToplogPostsPreview posts={posts} />)
+            }
+            {/* <div className={styles['top-section-container']}>
                 <div className={styles['top-container']}>
                     <SectionHeader sectionName={'Lifestyle'} />
                     <TopSection posts={lifestylePosts} />
@@ -61,9 +54,9 @@ const BlogPostsPage = ({ history }) => {
             <HeadingWithDescription heading={'Our Recipes'} description={'Check our new Food section for our hand-picked recipes!'}/>
             <div className={styles['small-posts-section']}>
                 <SmallPostsSection posts={foodPosts}/>
-            </div>
+            </div> */}
         </div>
     );
 }
 
-export default withRouter(BlogPostsPage);
+export default withRouter(BlogPostsSection);

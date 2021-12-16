@@ -4,7 +4,7 @@ const SmallPostsSection = ({ posts }) => {
 
     return (
         <div className={style["small-posts-container"]}>
-       { posts.map(post => <SmallPost post={post} key={`smallPosts${post._id}`}/>)}
+       { posts?.map(post => <SmallPost post={post} key={`smallPosts${post._id}`}/>)}
         </div>
     )
 }

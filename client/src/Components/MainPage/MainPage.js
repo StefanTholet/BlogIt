@@ -4,7 +4,7 @@ import { getPosts } from '../services/blogService';
 import HeroImage from '../HeroImage/HeroImage';
 import HeadingWithDescription from '../Typography/HeadingWithDescription';
 import SlideshowPosts from '../Blog/SlideshowPosts/SlideshowPosts';
-import BlogPostsPage from '../Blog/BlogPostsPage/BlogPostsPage'
+import BlogPostsSection from '../Blog/BlogPostsSection/BlogPostsSection'
 const MainPage = () => {
    
     const [posts, setPosts] = useState([])
@@ -17,12 +17,13 @@ const MainPage = () => {
             })
             .catch(err => console.log(err))
     }, []);
+    console.log(posts);
     return (
         <div className={style["main-page-container"]}>
             <HeroImage imageSrc={"main.jpg"} />
             <HeadingWithDescription heading={'Featured Posts'} description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.'} />
             <SlideshowPosts posts={posts} />
-            <BlogPostsPage /> 
+            <BlogPostsSection postsList={posts}/> 
         </div>
     )
 }

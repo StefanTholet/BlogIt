@@ -21,7 +21,7 @@ const Slide = ({ post, onSlidingPostHover }) => {
 
 
     return (
-        <NavLink to={`/blog/read-more/${_id}`}>
+        // <NavLink to={`/blog/read-more/${_id}`}>
         <div className={style.slide}
             style={{
                 backgroundImage: `url(${imageUrl})`,
@@ -34,7 +34,7 @@ const Slide = ({ post, onSlidingPostHover }) => {
         >
             <div className={style["post-info"]}>
                 <div className={style["category-div"]}>
-                    <NavLink to="/" className={style["category-link"]} style={{backgroundColor}}>{category}</NavLink>
+                    <div className={style["category-link"]} style={{backgroundColor}}>{category}</div>
                 </div>
                 <h3 className={style["post-title"]}>{title}</h3>
                 <div className={style["post-meta"]}>
@@ -47,7 +47,7 @@ const Slide = ({ post, onSlidingPostHover }) => {
                 </div>
             </div>
         </div>
-        </NavLink>
+        // </NavLink>
     )
 }
 
