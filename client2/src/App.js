@@ -2,7 +2,7 @@ import style from './App.module.css';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import MainPage from './Components/MainPage/MainPage'
-import BlogPostsPage from './Components/Blog/BlogPostsPage/BlogPostsPage';
+import BlogPostsPage from './Components/Blog/BlogPostsSection/BlogPostsSection';
 import ReadBlogPost from './Components/Blog/ReadBlogPost/ReadBlogPost';
 import CreateBlog from './Components/Blog/CreateBlog/CreateBlog';
 import Register from './Components/Auth/Register';

@@ -1,30 +1,21 @@
-import styles from './blogPostsPage.module.css';
+
 import { useState, useEffect, useContext } from 'react';
-import { getPosts } from '../../services/blogService';
 import { withRouter } from 'react-router-dom';
 import UserContext from '../../Contexts/UserContext';
+
 import SectionHeader from '../Sections/SectionHeader'
 import TopSection from '../Sections/TopSection';
 import BottomSection from '../Sections/BottomSection';
 
+import './blogPostsSection.scss';
 
-const BlogPostsPage = ({ history }) => {
+const BlogPostsPage = ({ posts }) => {
 
     const [user, setUser] = useContext(UserContext)
-    const [posts, setPosts] = useState([]);
     const [lifestylePosts, setLifestylePosts] = useState([])
     const [foodPosts, setFoodPosts] = useState([])
     const [travelPosts, setTravelPosts] = useState([])
     const [fashionPosts, setFashionPosts] = useState([])
-
-    useEffect(() => {
-        getPosts()
-            .then(result => result.json())
-            .then(allPosts => {
-                setPosts(allPosts)
-            })
-            .catch(err => console.log(err))
-    }, []);
 
     useEffect(() => {
         setLifestylePosts(filterPosts(posts, 'Lifestyle'));
@@ -33,28 +24,27 @@ const BlogPostsPage = ({ history }) => {
         setTravelPosts(filterPosts(posts, 'Travel'));
     }, [posts])
 
-    console.log(travelPosts)
     const filterPosts = (allPosts, typeOfPost) => {
         const filteredArray = allPosts.filter(x => x.category === typeOfPost);
         return filteredArray
     }
 
     return (
-        <div className={styles["category-sections"]}>
-            <div className={styles['top-section-container']}>
-                <div className={styles['top-container']}>
+        <div className="category-sections">
+            <div className="top-section-container">
+                <div className="top-container">
                     <SectionHeader sectionName={'Lifestyle'} />
                     <TopSection posts={lifestylePosts} containerWidth={'375px'} />
                 </div>
-                <div className={styles['top-container']}>
+                <div className="top-container">
                     <SectionHeader sectionName={'Fashion'} />
                     <TopSection posts={fashionPosts} containerWidth={'375px'} />
                 </div>
             </div>
 
 
-            <div className={styles['bottom-section-container']}>
-                <div className={styles['bottom-section-container']}>
+            <div className="bottom-section-container">
+                <div className="bottom-section-container">
                     <SectionHeader sectionName={'Тravel'} />
                     <BottomSection posts={travelPosts} containerWidth={'700px'}/>
                 </div>

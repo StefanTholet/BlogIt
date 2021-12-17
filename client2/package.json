@@ -27,6 +27,7 @@
     "react-html-parser": "^2.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "sass": "^1.45.0",
     "styled-jsx": "^3.4.4",
     "web-vitals": "^1.1.0"
   },
